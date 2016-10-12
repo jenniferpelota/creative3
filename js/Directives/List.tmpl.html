@@ -1,0 +1,33 @@
+<div class="list">
+
+  <div class="search-bar">
+    <div class="list__count">
+      You have {{ list.messages.length && list.messages.length || 'no' }} messages
+    </div>
+    <div ng-hide="!list.messages.length">
+      <input type="text" class="list__search" 
+        ng-model="list.search" placeholder="Search by 'from'">
+    </div>
+
+  </div>
+  <ul class="list__list">
+    <li ng-show="!list.messages.length" class="no-todos">
+      Nothing to do!
+    </li>
+    <li ng-repeat="message in list.messages | filter:{ from: list.search }">
+      <div class="list__list-info">
+        <p class="list__list-from"> From: {{ message.from }} </p>
+        <p class="list__list-date"> {{ message.date | date: 'dd/MM/yyyy' }} </p>
+        <p class="list__list-subject"> {{ message.subject }} </p>
+      </div>
+      <div class="list__list-actions">
+        <a href="" ng-click="list.goToMessage(message.id);">
+          Details
+        </a>
+        <a href="" ng-click="list.deleteMessage(id, $index);">
+          Delete
+        </a>
+      </div>
+    </li>
+  </ul>
+</div>
